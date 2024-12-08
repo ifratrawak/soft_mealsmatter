@@ -1,0 +1,59 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>store</title>
+</head>
+<body>
+{% block content %}
+
+{% if user.is_authenticated %}
+<a href="{% url 'create-store' %}">Add new Shop</a>
+{% else %}
+<a href="{% url 'login' %}">Add new Shop</a>
+{% endif %}
+
+    {% for s in stores %}
+
+
+
+    <div class="card" style="width: 18rem;">
+
+    <div class="card-header">
+    Featured
+  </div>
+    {% if s.store_img %}
+
+    <img src="{{ s.store_img.url }}" height="350px" width="500px" class="card-img-top" alt="...">
+    {% endif %}
+
+
+    <div class="card-body">
+    <h5 class="card-title">{{ s.name }}</h5>
+    <p class="card-text">Location: {{ s.location }}, Owner: {{ s.owner }} </p>
+
+          <a href="{% url 'upd-store' s.id %}" class="btn btn-primary">Update Store</a>
+    </div>
+</div>
+
+
+
+        <br><br>
+
+    {% if s.store_img %}
+{#    <img src="{{ s.store_img.url }}" height="350px" width="500px" alt="">#}
+    {% endif %}
+
+    {% endfor %}
+
+
+
+
+
+
+
+{% endblock %}
+
+</body>
+</html>
